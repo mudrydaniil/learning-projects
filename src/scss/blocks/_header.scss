@@ -1,0 +1,47 @@
+@use '../base/mixins.scss' as *;
+@use '../base/variables.scss' as *;
+
+.header {
+    padding: 12px 0;
+    background: linear-gradient(90deg, $trello-blue-start, $trello-blue-end);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__icon {
+        font-size: 32px;
+        color: white;
+        line-height: 1;
+    }
+
+    &__title {
+        @include font(22px, 1.3, 600);
+        color: white;
+        margin: 0;
+        letter-spacing: -0.4px;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+    &__clock {
+        @include font(16px, 1, 400);
+        color: white;
+        opacity: 0.92;
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+    }
+}
