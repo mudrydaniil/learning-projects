@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'fontello';
-  src: url("/src/font/fontello.woff2") format("woff2"),
-    url("/src/font/fontello.woff") format("woff");
+  src: url('/src/font/fontello.woff2') format('woff2'),
+    url('/src/font/fontello.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?14803059#fontello') format('svg');
+    src: url('../font/fontello.svg?87052392#fontello') format('svg');
   }
 }
 */
@@ -52,6 +52,11 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
+.icon-right-open-big:before {
+  content: '\e800';
+}
+
+/* '' */
 .icon-trello:before {
   content: '\f181';
 }

@@ -29,6 +29,107 @@
     </div>
   </header>
 
+  <section class="tasks">
+    <main class="main pt-5 pb-5">
+      <div class="container">
+
+        <!-- Пока одна колонка "В работе" как пример -->
+        <div class="board">
+          <div class="board-column">
+            <div class="board-column__header">
+              <h3 class="board-column__title">В работе</h3>
+              <span class="board-column__count">3</span>
+            </div>
+
+            <div class="board-column__cards">
+
+              <!-- Пример одной статической карточки -->
+              <div class="card task-card shadow-sm mb-3">
+                <div class="card-body">
+                  <!-- Чекбокс + заголовок -->
+                  <div class="d-flex align-items-start mb-2">
+                    <div class="form-check me-3">
+                      <input class="form-check-input mt-1" type="checkbox" id="task-static-1">
+                    </div>
+                    <h5 class="card-title mb-1 flex-grow-1">
+                      Сделать лендинг для клиента
+                    </h5>
+                    <button type="button" class="btn btn-sm btn-danger p-0" data-role="delete">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-x pe-none" viewBox="0 0 16 16">
+                        <path
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Описание -->
+                  <p class="card-text text-muted small mb-3">
+                    Необходимо подготовить 5 вариантов главной страницы. Согласовать цвета и шрифты с заказчиком.
+                  </p>
+                  <!-- Кнопка редактирования и селект -->
+                  <div class="d-flex justify-content-between mb-3">
+                    <button type="button" class="btn btn-secondary"
+                      style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">Edit</button>
+                    <select class="form-select-sm custom-sm-select" aria-label="Small select example">
+                      <option selected>→</option>
+                      <option value="1">Pavel</option>
+                      <option value="2">Ivan</option>
+                      <option value="3">Oleg</option>
+                    </select>
+                  </div>
+
+                  <!-- Метки / статус / id -->
+                  <div class="d-flex justify-content-between align-items-center small text-muted">
+                    <span class="task-id">ID: 1001</span>
+                    <span class="badge bg-secondary">В работе</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ещё одна карточка для примера -->
+              <div class="card task-card shadow-sm mb-3">
+                <div class="card-body">
+                  <div class="d-flex align-items-start mb-2">
+                    <div class="form-check me-3">
+                      <input class="form-check-input mt-1" type="checkbox" id="task-static-2" checked>
+                    </div>
+                    <h5 class="card-title mb-1 flex-grow-1">
+                      Купить молоко и хлеб
+                    </h5>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center small text-muted">
+                    <span class="task-id">ID: 1002</span>
+                    <span class="badge bg-success">Выполнено</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Кнопка "Добавить задачу" -->
+            <button class="btn btn-primary btn-add-task w-100 text-centr ps-3">
+              Добавить задачу
+            </button>
+          </div>
+          <!-- ------------------------------------------------------ -->
+          <!-- Можно сразу добавить ещё одну колонку для наглядности -->
+          <div class="board-column">
+            <div class="board-column__header">
+              <h3 class="board-column__title">На проверке</h3>
+              <span class="board-column__count">1</span>
+            </div>
+            <div class="board-column__cards">
+              <!-- Пусто пока -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </section>
+
   <!-- <div class="container-fluid w-75">
     <h1>Parcel Vanilla App</h1>
     <button id="button" class="btn btn-primary" type="button">Click</button>
