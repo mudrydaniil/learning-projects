@@ -44,7 +44,7 @@
             <div class="board-column__cards">
 
               <!-- Пример одной статической карточки -->
-              <div class="card task-card shadow-sm mb-3">
+              <div class="card task-card shadow-sm mb-3" id="todoCard">
                 <div class="card-body">
                   <!-- Чекбокс + заголовок -->
                   <div class="d-flex align-items-start mb-2">
@@ -54,7 +54,7 @@
                     <h5 class="card-title mb-1 flex-grow-1">
                       Сделать лендинг для клиента
                     </h5>
-                    <button type="button" class="btn btn-sm btn-danger p-0" data-role="delete">
+                    <button type="button" class="btn btn-sm btn-danger p-0" data-role="delete" id="deleteButton">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         class="bi bi-x pe-none" viewBox="0 0 16 16">
                         <path
@@ -69,10 +69,10 @@
                   </p>
                   <!-- Кнопка редактирования и селект -->
                   <div class="d-flex justify-content-between mb-3">
-                    <button type="button" class="btn btn-secondary"
+                    <button type="button" class="btn btn-secondary" id="buttonEdit"
                       style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">Edit</button>
-                    <select class="form-select-sm custom-sm-select" aria-label="Small select example">
-                      <option selected>→</option>
+                    <select class="form-select form-select-sm custom-sm-select" aria-label="Small select example">
+                      <option selected>Select the state</option>
                       <option value="1">Pavel</option>
                       <option value="2">Ivan</option>
                       <option value="3">Oleg</option>
@@ -81,8 +81,8 @@
 
                   <!-- Метки / статус / id -->
                   <div class="d-flex justify-content-between align-items-center small text-muted">
-                    <span class="task-id">ID: 1001</span>
-                    <span class="badge bg-secondary">В работе</span>
+                    <span class="user-name">User</span>
+                    <time class="badge bg-success">12:00</time>
                   </div>
                 </div>
               </div>
@@ -100,8 +100,8 @@
                   </div>
 
                   <div class="d-flex justify-content-between align-items-center small text-muted">
-                    <span class="task-id">ID: 1002</span>
-                    <span class="badge bg-success">Выполнено</span>
+                    <span class="user-name">User</span>
+                    <time class="badge bg-success">12:00</time>
                   </div>
                 </div>
               </div>
@@ -109,7 +109,7 @@
             </div>
 
             <!-- Кнопка "Добавить задачу" -->
-            <button class="btn btn-primary btn-add-task w-100 text-centr ps-3">
+            <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 text-centr ps-3">
               Добавить задачу
             </button>
           </div>
@@ -130,32 +130,25 @@
     </main>
   </section>
 
-  <!-- <div class="container-fluid w-75">
-    <h1>Parcel Vanilla App</h1>
-    <button id="button" class="btn btn-primary" type="button">Click</button>
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Launch demo modal
-    </button>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+  <!-- Модальное окно -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
+  </div>
 </body>
 
 </html>
