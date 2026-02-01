@@ -33,118 +33,146 @@
     <main class="main pt-5 pb-5">
       <div class="container">
 
-        <!-- Пока одна колонка "В работе" как пример -->
         <div class="board">
           <div class="board-column">
             <div class="board-column__header">
               <h3 class="board-column__title">В работе</h3>
-              <span class="board-column__count">3</span>
+              <span class="board-column__count">0</span>
             </div>
 
-            <div class="board-column__cards">
-
-              <!-- Пример одной статической карточки -->
-              <div class="card task-card shadow-sm mb-3" id="todoCard">
-                <div class="card-body">
-                  <!-- Чекбокс + заголовок -->
-                  <div class="d-flex align-items-start mb-2">
-                    <div class="form-check me-3">
-                      <input class="form-check-input mt-1" type="checkbox" id="task-static-1">
-                    </div>
-                    <h5 class="card-title mb-1 flex-grow-1">
-                      Сделать лендинг для клиента
-                    </h5>
-                    <button type="button" class="btn btn-sm btn-danger p-0" data-role="delete" id="deleteButton">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-x pe-none" viewBox="0 0 16 16">
-                        <path
-                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  <!-- Описание -->
-                  <p class="card-text text-muted small mb-3">
-                    Необходимо подготовить 5 вариантов главной страницы. Согласовать цвета и шрифты с заказчиком.
-                  </p>
-                  <!-- Кнопка редактирования и селект -->
-                  <div class="d-flex justify-content-between mb-3">
-                    <button type="button" class="btn btn-secondary" id="buttonEdit"
-                      style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">Edit</button>
-                    <select class="form-select form-select-sm custom-sm-select" aria-label="Small select example">
-                      <option selected>Select the state</option>
-                      <option value="1">Pavel</option>
-                      <option value="2">Ivan</option>
-                      <option value="3">Oleg</option>
-                    </select>
-                  </div>
-
-                  <!-- Метки / статус / id -->
-                  <div class="d-flex justify-content-between align-items-center small text-muted">
-                    <span class="user-name">User</span>
-                    <time class="badge bg-success">12:00</time>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Ещё одна карточка для примера -->
-              <div class="card task-card shadow-sm mb-3">
-                <div class="card-body">
-                  <div class="d-flex align-items-start mb-2">
-                    <div class="form-check me-3">
-                      <input class="form-check-input mt-1" type="checkbox" id="task-static-2" checked>
-                    </div>
-                    <h5 class="card-title mb-1 flex-grow-1">
-                      Купить молоко и хлеб
-                    </h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between align-items-center small text-muted">
-                    <span class="user-name">User</span>
-                    <time class="badge bg-success">12:00</time>
-                  </div>
-                </div>
-              </div>
-
+            <div class="board-column__cards" id="todo-cards">
+              <!-- сюда будем добавлять карточки динамически -->
             </div>
 
-            <!-- Кнопка "Добавить задачу" -->
-            <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 text-centr ps-3">
+            <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 mt-3">
               Добавить задачу
             </button>
           </div>
-          <!-- ------------------------------------------------------ -->
-          <!-- Можно сразу добавить ещё одну колонку для наглядности -->
-          <div class="board-column">
-            <div class="board-column__header">
-              <h3 class="board-column__title">На проверке</h3>
-              <span class="board-column__count">1</span>
-            </div>
-            <div class="board-column__cards">
-              <!-- Пусто пока -->
-            </div>
-          </div>
-
         </div>
+
       </div>
     </main>
   </section>
 
+
+
+  <template>
+    <!-- Пока одна колонка "В работе" как пример -->
+    <div class="board">
+      <div class="board-column">
+        <div class="board-column__header">
+          <h3 class="board-column__title">В работе</h3>
+          <span class="board-column__count">3</span>
+        </div>
+
+        <div class="board-column__cards">
+
+          <!-- Пример одной статической карточки -->
+          <div class="card task-card shadow-sm mb-3" id="todoCard">
+            <div class="card-body">
+              <!-- Чекбокс + заголовок -->
+              <div class="d-flex align-items-start mb-2">
+                <div class="form-check me-3">
+                  <input class="form-check-input mt-1" type="checkbox" id="task-static-1">
+                </div>
+                <h5 class="card-title mb-1 flex-grow-1">
+                  Сделать лендинг для клиента
+                </h5>
+                <button type="button" class="btn btn-sm btn-danger p-0" data-role="delete" id="deleteButton">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-x pe-none" viewBox="0 0 16 16">
+                    <path
+                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Описание -->
+              <p class="card-text text-muted small mb-3">
+                Необходимо подготовить 5 вариантов главной страницы. Согласовать цвета и шрифты с заказчиком.
+              </p>
+              <!-- Кнопка редактирования и селект -->
+              <div class="d-flex justify-content-between mb-3">
+                <button type="button" class="btn btn-secondary" id="buttonEdit"
+                  style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">Edit</button>
+                <select class="form-select form-select-sm custom-sm-select" aria-label="Small select example">
+                  <option selected>Select the state</option>
+                  <option value="1">Pavel</option>
+                  <option value="2">Ivan</option>
+                  <option value="3">Oleg</option>
+                </select>
+              </div>
+
+              <!-- Метки / статус / id -->
+              <div class="d-flex justify-content-between align-items-center small text-muted">
+                <span class="user-name">User</span>
+                <time class="badge bg-success">12:00</time>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Кнопка "Добавить задачу" -->
+        <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 text-centr ps-3">
+          Добавить задачу
+        </button>
+      </div>
+    </div>
+    </div>
+  </template>
+
   <!-- Модальное окно -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow rounded-4 overflow-hidden">
+
+        <!-- Заголовок -->
+        <div class="modal-header bg-white border-0 px-4 pt-4 pb-2">
+          <h5 class="modal-title fw-bold text-dark fs-4" id="exampleModalLabel">
+            Добавить задачу
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          ...
+
+        <!-- Тело -->
+        <div class="modal-body bg-white px-4 pb-4">
+          <form id="taskForm">
+            <!-- Название -->
+            <div class="mb-4">
+              <label for="modalTitle" class="form-label fw-semibold text-dark mb-2">Название</label>
+              <input type="text" class="form-control form-control-lg rounded-3 border-secondary-subtle" id="modalTitle"
+                placeholder="Что нужно сделать?" required>
+            </div>
+
+            <!-- Описание -->
+            <div class="mb-4">
+              <label for="modalDescription" class="form-label fw-semibold text-dark mb-2">Описание</label>
+              <textarea class="form-control rounded-3 border-secondary-subtle" id="modalDescription" rows="4"
+                placeholder="Подробности..."></textarea>
+            </div>
+
+            <!-- Ответственный -->
+            <div class="mb-4">
+              <label for="modalUser" class="form-label fw-semibold text-dark mb-2">Ответственный</label>
+              <select class="form-select form-select-lg rounded-3 border-secondary-subtle" id="modalUser">
+                <option value="" selected disabled>Выберите пользователя</option>
+                <!-- опции добавим позже через JS -->
+              </select>
+            </div>
+
+            <!-- Кнопки -->
+            <div class="d-flex justify-content-end gap-3">
+              <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-pill fw-medium"
+                data-bs-dismiss="modal">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill fw-medium">
+                Confirm
+              </button>
+            </div>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
       </div>
     </div>
   </div>

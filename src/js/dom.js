@@ -1,4 +1,6 @@
-const $ = (selector) => document.querySelector(selector)
+function $(selector) {
+    return document.querySelector(selector)
+}
 
 // Variables --------------------------------------
 

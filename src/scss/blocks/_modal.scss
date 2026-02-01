@@ -1,0 +1,8 @@
+@use '../libs/libs.scss';
+@use '../base/mixins.scss' as *;
+@use '../base/variables.scss' as *;
+
+.custom-select-modal {
+    max-width: 200px;
+    width: 100%;
+}
