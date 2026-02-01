@@ -1,3 +1,4 @@
+@use '../libs/libs.scss';
 @use '../base/mixins.scss' as *;
 @use '../base/variables.scss' as *;
 
@@ -90,11 +91,11 @@
 }
 
 .custom-sm-select {
-    appearance: none;
-    width: 30px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 140px;
     padding: 4px 8px;
     font-size: 14px;
     background-color: #6c757d;
     color: $light;
+    border: none;
 }
