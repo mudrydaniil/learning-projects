@@ -1,23 +1,38 @@
 import Modal from 'bootstrap/js/dist/modal'
+// Ммпортируем всё необходимое для управления модальным окном
 import {
-    handleSubmitForm
-} from './handlers.js'
-import {
-    buttonAddTask,
+    buttonAdd,
     modalElement,
-}
-    from './dom.js'
+    taskForm,
+} from './dom.js'
+import {
+    handleAddTask,
+} from './handlers.js'
 
-function handleClickButton() {
-    const modal = new Modal(modalElement)
-    console.log(modal)
-    modal.show()
-}
+export function initModal() {
+    // Поверяем на наличие кнопки 'Добавление задачи'
+    if (!buttonAdd) {
+        console.error('Кнопка buttonAdd не найдена')
+        return
+    }
 
-function initModal() {
-    buttonAddTask.addEventListener('click', handleClickButton)
-}
+    // Поверяем на наличие модального окна
+    if (!modalElement) {
+        console.error('Модальное окно exampleModal не найдено')
+    }
 
-export {
-    initModal,
+    // Проверяем на наличие формы
+    if (!taskForm) {
+        console.error('Форма taskForm не найдена')
+        return
+    }
+
+    // Открываем модальное окно при нажатии кнопки 'Добавить задачу'
+    buttonAdd.addEventListener('click', () => {
+        const modal = new Modal(modalElement)
+        modal.show()
+    })
+
+    // При отправке формы (нажатием Confirm) вызываем логику добавления нашей задачи
+    taskForm.addEventListener('submit', handleAddTask)
 }
