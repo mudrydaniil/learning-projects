@@ -33,93 +33,49 @@
     <main class="main pt-5 pb-5">
       <div class="container">
 
-        <div class="board">
-          <div class="board-column">
-            <div class="board-column__header">
-              <h3 class="board-column__title">В работе</h3>
-              <span class="board-column__count">0</span>
+        <div class="board d-flex gap-4 overflow-x-auto pb-4">
+
+          <!-- Колонка "В работе" (IN PROGRESS) -->
+          <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="inprogress">
+            <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
+              <h3 class="board-column__title text-white">В работе</h3>
+              <span class="board-column__count badge bg-warning">0</span>
             </div>
 
-            <div class="board-column__cards" id="todo-cards">
-              <!-- сюда будем добавлять карточки динамически -->
+            <div class="board-column__cards" id="inprogress-cards" data-status="inprogress">
+              <!-- сюда будем динамически добавлять карточки -->
             </div>
 
+            <!-- Кнопка добавления задачи (только в этой колонке, как в Trello) -->
             <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 mt-3">
               Добавить задачу
             </button>
           </div>
+
+          <!-- Пока оставляем место под TODO и DONE — можно раскомментировать позже -->
+          <!--
+        <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="todo">
+          <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
+            <h3 class="board-column__title text-white">TODO</h3>
+            <span class="board-column__count badge bg-primary">0</span>
+          </div>
+          <div class="board-column__cards" id="todo-cards" data-status="todo"></div>
+        </div>
+
+        <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="done">
+          <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
+            <h3 class="board-column__title text-white">DONE</h3>
+            <span class="board-column__count badge bg-success">0</span>
+          </div>
+          <div class="board-column__cards" id="done-cards" data-status="done"></div>
+        </div>
+        -->
+
         </div>
 
       </div>
     </main>
   </section>
-
-
-
-  <template>
-    <!-- Пока одна колонка "В работе" как пример -->
-    <div class="board">
-      <div class="board-column">
-        <div class="board-column__header">
-          <h3 class="board-column__title">В работе</h3>
-          <span class="board-column__count">3</span>
-        </div>
-
-        <div class="board-column__cards">
-
-          <!-- Пример одной статической карточки -->
-          <div class="card task-card shadow-sm mb-3" id="todoCard">
-            <div class="card-body">
-              <!-- Чекбокс + заголовок -->
-              <div class="d-flex align-items-start mb-2">
-                <div class="form-check me-3">
-                  <input class="form-check-input mt-1" type="checkbox" id="task-static-1">
-                </div>
-                <h5 class="card-title mb-1 flex-grow-1">
-                  Сделать лендинг для клиента
-                </h5>
-                <button type="button" class="btn btn-sm btn-danger p-0" data-role="delete" id="deleteButton">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                    class="bi bi-x pe-none" viewBox="0 0 16 16">
-                    <path
-                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                  </svg>
-                </button>
-              </div>
-
-              <!-- Описание -->
-              <p class="card-text text-muted small mb-3">
-                Необходимо подготовить 5 вариантов главной страницы. Согласовать цвета и шрифты с заказчиком.
-              </p>
-              <!-- Кнопка редактирования и селект -->
-              <div class="d-flex justify-content-between mb-3">
-                <button type="button" class="btn btn-secondary" id="buttonEdit"
-                  style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">Edit</button>
-                <select class="form-select form-select-sm custom-sm-select" aria-label="Small select example">
-                  <option selected>Select the state</option>
-                  <option value="1">Pavel</option>
-                  <option value="2">Ivan</option>
-                  <option value="3">Oleg</option>
-                </select>
-              </div>
-
-              <!-- Метки / статус / id -->
-              <div class="d-flex justify-content-between align-items-center small text-muted">
-                <span class="user-name">User</span>
-                <time class="badge bg-success">12:00</time>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Кнопка "Добавить задачу" -->
-        <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 text-centr ps-3">
-          Добавить задачу
-        </button>
-      </div>
-    </div>
-    </div>
-  </template>
 
   <!-- Модальное окно -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -175,7 +131,6 @@
 
       </div>
     </div>
-  </div>
   </div>
 </body>
 

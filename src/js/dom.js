@@ -4,16 +4,26 @@ function $(selector) {
 
 // Variables --------------------------------------
 
-// const buttonDeleteAll = $('#buttonDeleteAll')
-const cardElement = $('#todoCard')
+// Кнопка добавления задачи
+const buttonAdd = $('#buttonAdd')
+
+// Модальное окно и его элементы
 const modalElement = $('#exampleModal')
-const buttonEditElement = $('#buttonEdit')
-const buttonAddTask = $('#buttonAdd')
+const taskForm = $('#taskForm')
+const modalTitle = $('#modalTitle')
+const modalDescription = $('#modalDescription')
+const modalUser = $('#modalUser')
+
+// Карточки в колонке 'В работе'
+const inProgressCards = $('#inprogress-cards')
 
 export {
     $,
-    cardElement,
+    buttonAdd,
     modalElement,
-    buttonEditElement,
-    buttonAddTask,
+    taskForm,
+    modalTitle,
+    modalDescription,
+    modalUser,
+    inProgressCards,
 }

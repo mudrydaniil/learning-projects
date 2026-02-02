@@ -1,9 +1,9 @@
 import {
     startClock
 } from './clock.js'
-startClock()
+startClock() // Часы в шапке сайта
 
 import {
     initModal,
 } from './modal.js'
-initModal()
+initModal() // Запуск модального окна
