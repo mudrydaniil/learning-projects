@@ -5,10 +5,23 @@ import {
     inProgressCards,
     modalElement,
     modalUser,
+    buttonDeleteAll,
 } from './dom.js'
 
 // Массив где будут храниться наши данные(задачи)
-let tasks = []
+let tasks = getData() // Загруза данных из localStorage
+let editTaskId = null
+
+// Конструктор задачи 
+function Task(title, description, user = 'Не выбран') {
+    this.title = title
+    this.description = description
+    this.user = user
+    this.status = 'inprogress'
+    this.isCompleted = false
+    this.createdAt = new Date()
+    this.id = crypto.randomUUID()
+}
 
 // Создаём шаблон карточки
 function createTaskCard(task) {
@@ -60,8 +73,6 @@ function createTaskCard(task) {
     `
     return card
 }
-
-let editTaskId = null
 
 function handleAddTask(event) {
     event.preventDefault()
