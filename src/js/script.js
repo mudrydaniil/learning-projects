@@ -9,11 +9,20 @@ import {
 initModal() // Запуск модального окна
 
 import {
+    getData,
     renderTasks,
     initCardHandlers,
+    handleDeleteAll,
 } from './handlers.js'
 
+import {
+    buttonDeleteAll,
+} from './dom.js'
+
 document.addEventListener('DOMContentLoaded', () => {
-    renderTasks() // показываем начальное состояние
+    renderTasks() // рендерим
     initCardHandlers() // Вешаем обработчики - удаления, редактирования и смены статуса задачи
+    if (buttonDeleteAll) {
+        buttonDeleteAll.addEventListener('click', handleDeleteAll)
+    }
 })

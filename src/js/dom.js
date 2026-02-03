@@ -18,7 +18,7 @@ const modalUser = $('#modalUser')
 const inProgressCards = $('#inprogress-cards')
 
 // Кнопка удаления всех задач
-const buttonDeleteAll = $('.todo__delete-all')
+const buttonDeleteAll = $('#deleteAll')
 
 export {
     $,

@@ -137,8 +137,12 @@ function deleteTask(id) {
     if (!confirm('Удалить задачу?')) {
         return
     }
-    tasks = tasks.filter(todo => todo.id !== id)
-    renderTasks()
+    const index = tasks.findIndex(todo => todo.id === id)
+    if (index !== -1) {
+        tasks.splice(index, 1)
+        setData(tasks)
+        renderTasks()
+    }
 }
 
 // Редактирование задачи
@@ -159,12 +163,13 @@ function editTask(id) {
 
 // Перключение статуса через селектв карточке
 function changeStatus(select) {
-    const id = Number(select.dataset.id)
+    const id = select.dataset.id
     const newStatus = select.value
 
     const task = tasks.find(todo => todo.id === id)
     if (task) {
         task.status = newStatus
+        setData(tasks)
         renderTasks()
     }
 }
@@ -172,16 +177,18 @@ function changeStatus(select) {
 // Инициализация всех обработчиков карточек
 function initCardHandlers() {
     document.addEventListener('click', event => {
-        const target = event.target
-
-        if (target.classList.contains('delete-btn')) {
-            const id = Number(target.dataset.id)
-            deleteTask(id)
+        const deleteBtn = event.target.closest('.delete-btn');
+        if (deleteBtn) {
+            const id = deleteBtn.dataset.id;
+            deleteTask(id);
+            return;
         }
 
-        if (target.classList.contains('edit-btn')) {
-            const id = Number(target.dataset.id)
-            editTask(id)
+        const editBtn = event.target.closest('.edit-btn');
+        if (editBtn) {
+            const id = editBtn.dataset.id;
+            editTask(id);
+            return;
         }
     })
 
@@ -193,31 +200,44 @@ function initCardHandlers() {
     })
 }
 
-// Обновление содрежимого карточек(рендер)
-function renderTasks() {
-    // Очищаем колонку
-    document.querySelectorAll('.board-column__cards').forEach(container => {
-        container.innerHTML = ''
+// Загруза в localStorage
+function getData() {
+    const todos = localStorage.getItem('todos')
+    if (todos === null) {
+        return []
+    }
+    const dataArr = JSON.parse(todos)
+    dataArr.forEach(todo => {
+        todo.createdAt = new Date(todo.createdAt)
     })
+    return dataArr
+}
 
-    tasks.forEach(task => {
-        const container = document.querySelector(`.board - column__cards[data - status='${task.status}']`)
-        if (container) {
-            container.appendChild(createTaskCard(task))
-        }
-    })
+// Сохранение в localStorage
+function setData(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
 
-    // Обновляем все счётчики
-    document.querySelectorAll('.board-column').forEach(column => {
-        const status = column.dataset.status
-        const count = tasks.filter(todo => todo.status === status).length
-        const countElement = column.querySelector('.board-column__count')
-        if (countElement) countElement.textContent = count
-    })
+// DeleteAll
+function handleDeleteAll() {
+    if (tasks.length === 0) {
+        alert('Список уже пуст!')
+        return
+    }
+    if (confirm('Вы уверены, это очистит вес список задач.')) {
+        tasks.length = 0
+        setData(tasks)
+        renderTasks()
+        alert('Список очищен!')
+    }
 }
 
 export {
     handleAddTask,
     initCardHandlers,
     renderTasks,
+    handleDeleteAll,
+    getData,
+    setData,
+    Task,
 }
