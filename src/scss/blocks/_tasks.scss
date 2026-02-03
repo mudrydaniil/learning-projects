@@ -55,10 +55,8 @@
 }
 
 .task-card {
-    background: #2d3748;
-    border: none;
-    border-radius: 8px;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    background-color: $bg-card;
+    border: 1px solid $border-card;
 
     &:hover {
         transform: translateY(-2px);
@@ -92,10 +90,8 @@
 
 .custom-sm-select {
     width: 100%;
-    max-width: 140px;
+    max-width: 115px;
     padding: 4px 8px;
     font-size: 14px;
-    background-color: #6c757d;
-    color: $light;
     border: none;
 }
