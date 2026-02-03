@@ -24,54 +24,45 @@ function Task(title, description, user = 'Не выбран') {
 }
 
 // Создаём шаблон карточки
-function createTaskCard(task) {
-    const card = document.createElement('div')
-    card.className = 'card task-card shadow-sm mb-3'
-    card.dataset.id = task.id
-
-    card.innerHTML = `
-        <div class="card-body">
-            <!-- Чекбокс + заголовок + кнопка удаления справа -->
+function buildTaskTemplate(task) {
+    const { title, description, isCompleted, createdAt, id, user, status } = task
+    return `
+    <div class="card-body">
             <div class="d-flex align-items-start mb-2">
                 <div class="form-check me-3">
-                    <input class="form-check-input mt-1" type="checkbox">
+                    <input class="form-check-input mt-1" type="checkbox" id="task-${id}" data-id="${id}" ${isCompleted ? 'checked' : ''}>
                 </div>
                 <h5 class="card-title mb-1 flex-grow-1">
-                    ${task.title}
+                    ${title}
                 </h5>
-                <button type="button" class="btn btn-sm btn-danger p-0 delete-btn" data-id="${task.id}">
+                <button type="button" class="btn btn-sm btn-danger p-0 delete-btn" data-id="${id}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x pe-none" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                     </svg>
                 </button>
             </div>
 
-            <!-- Описание -->
             <p class="card-text text-muted small mb-3">
-                ${task.description || 'Нет описания'}
+                ${description || 'Нет описания'}
             </p>
 
-            <!-- Edit + селект статуса -->
             <div class="d-flex justify-content-between mb-3">
-                <button type="button" class="btn btn-light edit-btn" data-id="${task.id}"
-                    style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">
+                <button type="button" class="btn btn-secondary edit-btn" data-id="${id}" style="--bs-btn-padding-y: .30rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .85rem;">
                     Edit
                 </button>
-                <select class="form-select form-select-sm custom-sm-select status-select" data-id="${task.id}">
-                    <option value="todo" ${task.status === 'todo' ? 'selected' : ''}>TODO</option>
-                    <option value="inprogress" ${task.status === 'inprogress' ? 'selected' : ''}>В работе</option>
-                    <option value="done" ${task.status === 'done' ? 'selected' : ''}>DONE</option>
+                <select class="form-select form-select-sm custom-sm-select status-select" data-id="${id}">
+                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>TODO</option>
+                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>В работе</option>
+                    <option value="done" ${status === 'done' ? 'selected' : ''}>DONE</option>
                 </select>
             </div>
 
-            <!-- User + время -->
             <div class="d-flex justify-content-between align-items-center small text-muted">
-                <span class="user-name">${task.user || 'User'}</span>
-                <time class="badge bg-success">${task.time}</time>
+                <span class="user-name">${user}</span>
+                <time class="badge bg-success">${createdAt.toLocaleDateString()}</time>
             </div>
         </div>
     `
-    return card
 }
 
 function handleAddTask(event) {
@@ -188,7 +179,7 @@ function renderTasks() {
     })
 
     tasks.forEach(task => {
-        const container = document.querySelector(`.board-column__cards[data-status='${task.status}']`)
+        const container = document.querySelector(`.board - column__cards[data - status='${task.status}']`)
         if (container) {
             container.appendChild(createTaskCard(task))
         }
