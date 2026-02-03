@@ -65,6 +65,34 @@ function buildTaskTemplate(task) {
     `
 }
 
+// Рендерим задачи
+function renderTasks() {
+    document.querySelectorAll('.board-column__cards').forEach(container => {
+        container.innerHTML = ''
+    })
+
+    tasks.forEach(task => {
+        const container = document.querySelector(`.board-column__cards[data-status="${task.status}"]`)
+        if (container) {
+            const card = document.createElement('div')
+            card.className = 'card task-card shadow-sm mb-3'
+            card.dataset.id = task.id
+            card.innerHTML = buildTaskTemplate(task)
+            container.appendChild(card)
+        }
+    })
+}
+
+// Счётчик количества задач
+document.querySelectorAll('.board-column').forEach(column => {
+    const status = column.dataset.status
+    const count = tasks.filter(todo => todo.status === status).length
+    const countElement = column.querySelector('.board-column__count')
+    if (countElement) {
+        countElement.textContent = count
+    }
+})
+
 function handleAddTask(event) {
     event.preventDefault()
 
@@ -76,7 +104,6 @@ function handleAddTask(event) {
 
     const description = modalDescription.value.trim()
     const user = modalUser.value || 'Не выбран'
-    const time = new Date().toLocaleString('ru-RU')
 
     if (editTaskId) {
         const task = tasks.find(todo => todo.id === editTaskId)
@@ -84,20 +111,15 @@ function handleAddTask(event) {
             task.title = title
             task.description = description
             task.user = user
-            task.time = time + ' (изменено) '
+            task.createdAt = new Date()
         }
         editTaskId = null
     } else {
-        tasks.push({
-            id: Date.now(),
-            title,
-            description,
-            user,
-            status: 'inprogress',
-            time,
-        })
+        const newTask = new Task(title, description, user)
+        tasks.push(newTask)
     }
 
+    setData(tasks) // Сохранение в localStorage
     renderTasks()
 
     // Закрываем модалку 
