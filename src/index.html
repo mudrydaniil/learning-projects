@@ -35,42 +35,37 @@
 
         <div class="board d-flex gap-4 overflow-x-auto pb-4">
 
-          <!-- Колонка "В работе" (IN PROGRESS) -->
-          <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="inprogress">
+          <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="todo">
             <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
-              <h3 class="board-column__title text-white">В работе</h3>
+              <h3 class="board-column__title text-white">Todo</h3>
               <span class="board-column__count">0</span>
             </div>
+            <div class="board-column__cards" id="todo-cards" data-status="todo"></div>
 
-            <div class="board-column__cards" id="inprogress-cards" data-status="inprogress">
-              <!-- сюда будем динамически добавлять карточки -->
-            </div>
-
-            <!-- Кнопка добавления задачи (только в этой колонке, как в Trello) -->
             <button id="buttonAdd" class="btn btn-primary btn-add-task w-100 mt-3">
-              Добавить задачу
+              Add a task
             </button>
-            <button id="deleteAll" class="btn btn-outline-danger w-100 mt-3">Delete All</button>
           </div>
 
-          <!-- Пока оставляем место под TODO и DONE — можно раскомментировать позже -->
-          <!--
-        <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="todo">
-          <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
-            <h3 class="board-column__title text-white">TODO</h3>
-            <span class="board-column__count badge bg-primary">0</span>
+          <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="inprogress">
+            <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
+              <h3 class="board-column__title text-white">In progress</h3>
+              <span class="board-column__count">0</span>
+            </div>
+            <div class="board-column__cards" id="inprogress-cards" data-status="inprogress"></div>
           </div>
-          <div class="board-column__cards" id="todo-cards" data-status="todo"></div>
-        </div>
 
-        <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="done">
-          <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
-            <h3 class="board-column__title text-white">DONE</h3>
-            <span class="board-column__count badge bg-success">0</span>
+          <div class="board-column bg-white bg-opacity-10 rounded p-3" data-status="done">
+            <div class="board-column__header d-flex justify-content-between align-items-center mb-3">
+              <h3 class="board-column__title text-white">Done</h3>
+              <span class="board-column__count">0</span>
+            </div>
+            <div class="board-column__cards" id="done-cards" data-status="done"></div>
+
+            <button id="deleteAll" class="btn btn-outline-danger w-100 mt-3">
+              Delete All
+            </button>
           </div>
-          <div class="board-column__cards" id="done-cards" data-status="done"></div>
-        </div>
-        -->
 
         </div>
 
@@ -78,46 +73,38 @@
     </main>
   </section>
 
-  <!-- Модальное окно -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 shadow rounded-4 overflow-hidden">
 
-        <!-- Заголовок -->
         <div class="modal-header bg-white border-0 px-4 pt-4 pb-2">
           <h5 class="modal-title fw-bold text-dark fs-4" id="exampleModalLabel">
-            Добавить задачу
+            Add a task
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <!-- Тело -->
         <div class="modal-body bg-white px-4 pb-4">
           <form id="taskForm">
-            <!-- Название -->
             <div class="mb-4">
-              <label for="modalTitle" class="form-label fw-semibold text-dark mb-2">Название</label>
+              <label for="modalTitle" class="form-label fw-semibold text-dark mb-2">Name</label>
               <input type="text" class="form-control form-control-lg rounded-3 border-secondary-subtle" id="modalTitle"
                 placeholder="Что нужно сделать?" required>
             </div>
 
-            <!-- Описание -->
             <div class="mb-4">
-              <label for="modalDescription" class="form-label fw-semibold text-dark mb-2">Описание</label>
+              <label for="modalDescription" class="form-label fw-semibold text-dark mb-2">Description</label>
               <textarea class="form-control rounded-3 border-secondary-subtle" id="modalDescription" rows="4"
                 placeholder="Подробности..."></textarea>
             </div>
 
-            <!-- Ответственный -->
             <div class="mb-4">
-              <label for="modalUser" class="form-label fw-semibold text-dark mb-2">Ответственный</label>
+              <label for="modalUser" class="form-label fw-semibold text-dark mb-2">Responsible</label>
               <select class="form-select form-select-lg rounded-3 border-secondary-subtle" id="modalUser">
-                <option value="" selected disabled>Выберите пользователя</option>
-                <!-- опции добавим позже через JS -->
+                <option value="" selected disabled>Select user</option>
               </select>
             </div>
 
-            <!-- Кнопки -->
             <div class="d-flex justify-content-end gap-3">
               <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-pill fw-medium"
                 data-bs-dismiss="modal">
