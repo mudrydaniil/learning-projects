@@ -42,7 +42,7 @@ function buildTaskTemplate(task) {
                 </button>
             </div>
 
-            <p class="card-text text-muted small mb-3">
+            <p class="card-text text-light small mb-3">
                 ${description || 'Нет описания'}
             </p>
 
@@ -58,7 +58,7 @@ function buildTaskTemplate(task) {
             </div>
 
             <div class="d-flex justify-content-between align-items-center small text-muted">
-                <span class="user-name">${user}</span>
+                <span class="user-name text-light">${user}</span>
                 <time class="badge bg-success">${createdAt.toLocaleDateString()}</time>
             </div>
         </div>
