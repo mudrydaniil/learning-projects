@@ -51,9 +51,9 @@ function buildTaskTemplate(task) {
                     Edit
                 </button>
                 <select class="form-select form-select-sm custom-sm-select status-select" data-id="${id}">
-                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>Todo</option>
-                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>In progress</option>
-                    <option value="done" ${status === 'done' ? 'selected' : ''}>Done</option>
+                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>Задачи</option>
+                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>В работе</option>
+                    <option value="done" ${status === 'done' ? 'selected' : ''}>Готово</option>
                 </select>
             </div>
 
