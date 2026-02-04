@@ -22,15 +22,14 @@
 
     &__icon {
         font-size: 32px;
-        color: white;
+        color: $light;
         line-height: 32px;
     }
 
     &__title {
         @include font(22px, 29px, 600);
-        color: white;
+        color: $light;
         margin: 0;
-        letter-spacing: -0.4px;
     }
 
     &__right {
@@ -40,8 +39,8 @@
 
     &__clock {
         @include font(16px, 16px, 400);
-        color: white;
-        opacity: 0.92;
+        color: $light;
+        opacity: 0.9;
         margin: 0;
         font-family: "Segoe UI", sans-serif;
     }
