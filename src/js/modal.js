@@ -2,9 +2,14 @@ import Modal from 'bootstrap/js/dist/modal'
 // Ммпортируем всё необходимое для управления модальным окном
 
 import {
+    fetchUsers,
+} from './api.js'
+
+import {
     buttonAdd,
     modalElement,
     taskForm,
+    modalUser,
 } from './dom.js'
 
 import {
@@ -30,7 +35,23 @@ export function initModal() {
     }
 
     // Открываем модальное окно при нажатии кнопки 'Добавить задачу'
-    buttonAdd.addEventListener('click', () => {
+    buttonAdd.addEventListener('click', async () => {
+        const users = await fetchUsers()
+
+        if (modalUser) {
+            if (users.length === 0) {
+                modalUser.innerHTML = '<option value="">Пользователи не загрузились</option>'
+            } else {
+                let html = '<option value="" selected disabled>Выберите пользователя</option>'
+                users.forEach(user => {
+                    html += `<option value="${user.name}">${user.name}</option>`
+                })
+                modalUser.innerHTML = html
+            }
+        } else {
+            console.error('Элемент #modalUser не найден в dom.js')
+        }
+
         const modal = new Modal(modalElement)
         modal.show()
     })

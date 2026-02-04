@@ -17,7 +17,7 @@ function Task(title, description, user = 'Не выбран') {
     this.title = title
     this.description = description
     this.user = user
-    this.status = 'inprogress'
+    this.status = 'todo'
     this.isCompleted = false
     this.createdAt = new Date()
     this.id = crypto.randomUUID()
@@ -51,9 +51,9 @@ function buildTaskTemplate(task) {
                     Edit
                 </button>
                 <select class="form-select form-select-sm custom-sm-select status-select" data-id="${id}">
-                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>TODO</option>
-                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>В работе</option>
-                    <option value="done" ${status === 'done' ? 'selected' : ''}>DONE</option>
+                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>Todo</option>
+                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>In progress</option>
+                    <option value="done" ${status === 'done' ? 'selected' : ''}>Done</option>
                 </select>
             </div>
 
@@ -81,17 +81,17 @@ function renderTasks() {
             container.appendChild(card)
         }
     })
-}
 
-// Счётчик количества задач
-document.querySelectorAll('.board-column').forEach(column => {
-    const status = column.dataset.status
-    const count = tasks.filter(todo => todo.status === status).length
-    const countElement = column.querySelector('.board-column__count')
-    if (countElement) {
-        countElement.textContent = count
-    }
-})
+    // Счётчик количества задач
+    document.querySelectorAll('.board-column').forEach(column => {
+        const status = column.dataset.status
+        const count = tasks.filter(todo => todo.status === status).length
+        const countElement = column.querySelector('.board-column__count')
+        if (countElement) {
+            countElement.textContent = count
+        }
+    })
+}
 
 function handleAddTask(event) {
     event.preventDefault()
@@ -163,15 +163,26 @@ function editTask(id) {
 
 // Перключение статуса через селектв карточке
 function changeStatus(select) {
+    console.log('changeStatus сработал')
     const id = select.dataset.id
     const newStatus = select.value
 
     const task = tasks.find(todo => todo.id === id)
-    if (task) {
-        task.status = newStatus
-        setData(tasks)
-        renderTasks()
+    if (!task) {
+        return
     }
+    if (newStatus === 'inprogress') {
+        const currentInProgressCount = tasks.filter(todo => todo.status === 'inprogress' && todo.id !== id).length
+
+        if (currentInProgressCount >= 6) {
+            alert('Сначало надо выполнить текущие прежде чем ещё добавить одно дело')
+            select.value = task.status
+            return
+        }
+    }
+    task.status = newStatus
+    setData(tasks)
+    renderTasks()
 }
 
 // Инициализация всех обработчиков карточек
@@ -220,12 +231,13 @@ function setData(todos) {
 
 // DeleteAll
 function handleDeleteAll() {
-    if (tasks.length === 0) {
+    const doneTasks = tasks.filter(task => task.status === 'done')
+    if (doneTasks.length === 0) {
         alert('Список уже пуст!')
         return
     }
-    if (confirm('Вы уверены, это очистит вес список задач.')) {
-        tasks.length = 0
+    if (confirm('Удалить все задачи из колонки Done?')) {
+        tasks = tasks.filter(task => task.status !== 'done')
         setData(tasks)
         renderTasks()
         alert('Список очищен!')

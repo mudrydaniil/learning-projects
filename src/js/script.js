@@ -1,3 +1,5 @@
+import './api.js'
+
 import {
     startClock
 } from './clock.js'
