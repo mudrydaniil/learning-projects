@@ -31,16 +31,15 @@
     }
 
     &__title {
+        @include font(18px, 25px, 600);
         color: $light;
-        font-size: 1.1rem;
-        font-weight: 600;
         margin: 0;
     }
 
     &__count {
+        @include font(14px, 20px, 600);
         background: rgba(0, 0, 0, 0.3);
         color: $light;
-        font-size: 0.85rem;
         padding: 2px 10px;
         border-radius: 12px;
     }
@@ -59,11 +58,13 @@
 
     .card-title {
         color: $light;
-        font-size: 1rem;
+        font-size: 24px;
     }
 
     .text-muted,
-    .task-id {
+    .task-id,
+    .user-name,
+    time {
         color: $light !important; // Bootstrap перебивает
     }
 
@@ -91,8 +92,9 @@
 .status-select {
     width: 100%;
     max-width: 115px;
-    padding: 4px 8px;
+    padding: 4px 32px 4px 8px;
     font-size: 14px;
+    line-height: 20px;
     background-color: $bg-element;
     color: $light;
     border: none;
