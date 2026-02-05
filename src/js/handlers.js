@@ -12,15 +12,17 @@ import {
 let tasks = getData() // Загруза данных из localStorage
 let editTaskId = null
 
-// Конструктор задачи 
-function Task(title, description, user = 'Не выбран') {
-    this.title = title
-    this.description = description
-    this.user = user
-    this.status = 'todo'
-    this.isCompleted = false
-    this.createdAt = new Date()
-    this.id = crypto.randomUUID()
+// Конструктор задачи (класс)
+class Task {
+    constructor(title, description, user = 'Не выбран') {
+        this.title = title
+        this.description = description
+        this.user = user
+        this.status = 'todo'
+        this.isCompleted = false
+        this.createdAt = new Date()
+        this.id = crypto.randomUUID()
+    }
 }
 
 // Создаём шаблон карточки
@@ -51,9 +53,9 @@ function buildTaskTemplate(task) {
                     Edit
                 </button>
                 <select class="form-select form-select-sm custom-sm-select status-select" data-id="${id}">
-                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>Задачи</option>
-                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>В работе</option>
-                    <option value="done" ${status === 'done' ? 'selected' : ''}>Готово</option>
+                    <option value="todo" ${status === 'todo' ? 'selected' : ''}>To Do</option>
+                    <option value="inprogress" ${status === 'inprogress' ? 'selected' : ''}>In progress</option>
+                    <option value="done" ${status === 'done' ? 'selected' : ''}>Done</option>
                 </select>
             </div>
 
@@ -85,7 +87,7 @@ function renderTasks() {
     // Счётчик количества задач
     document.querySelectorAll('.board-column').forEach(column => { // для каждой колонки исполнямем код
         const status = column.dataset.status // получаем статус текущей колонки из атрибута data-status HTML элемента
-        const count = tasks.filter(todo => todo.status === status).length // ищем задачи только с нужным нам статусом
+        const count = tasks.filter(task => task.status === status).length // ищем задачи только с нужным нам статусом
         const countElement = column.querySelector('.board-column__count')
         if (countElement) {
             countElement.textContent = count
@@ -106,7 +108,7 @@ function handleAddTask(event) {
     const user = modalUser.value || 'Не выбран'
 
     if (editTaskId) {
-        const task = tasks.find(todo => todo.id === editTaskId)
+        const task = tasks.find(task => task.id === editTaskId)
         if (task) {
             task.title = title
             task.description = description
@@ -137,7 +139,7 @@ function deleteTask(id) {
     if (!confirm('Удалить задачу?')) {
         return
     }
-    const index = tasks.findIndex(todo => todo.id === id)
+    const index = tasks.findIndex(({ id: taskId }) => taskId === id)
     if (index !== -1) {
         tasks.splice(index, 1)
         setData(tasks)
@@ -147,15 +149,16 @@ function deleteTask(id) {
 
 // Редактирование задачи
 function editTask(id) {
-    const task = tasks.find(todo => todo.id === id)
+    const task = tasks.find(task => task.id === id)
     if (!task) {
         return
     }
     editTaskId = id
 
-    modalTitle.value = task.title
-    modalDescription.value = task.description || ''
-    modalUser.value = task.user || ''
+    const { title, description = '', user = '' } = task
+    modalTitle.value = title
+    modalDescription.value = description
+    modalUser.value = user
 
     const modal = new Modal(modalElement)
     modal.show()
@@ -167,14 +170,14 @@ function changeStatus(select) {
     const id = select.dataset.id // получаем id задачи
     const newStatus = select.value // возвращает нам значение статус выбранного option в select
 
-    const task = tasks.find(todo => todo.id === id)
+    const task = tasks.find(task => task.id === id)
     if (!task) {
         return
     }
     if (newStatus === 'inprogress') {
-        const currentInProgressCount = tasks.filter(todo => todo.status === 'inprogress' && todo.id !== id).length
+        const currentInProgressCount = tasks.filter(task => task.status === 'inprogress' && task.id !== id).length
 
-        if (currentInProgressCount >= 6) {
+        if (currentInProgressCount >= 3) {
             alert('Сначало надо выполнить текущие прежде чем ещё добавить одно дело')
             select.value = task.status
             return
@@ -218,8 +221,8 @@ function getData() {
         return []
     }
     const dataArr = JSON.parse(todos)
-    dataArr.forEach(todo => {
-        todo.createdAt = new Date(todo.createdAt)
+    dataArr.forEach(task => {
+        task.createdAt = new Date(task.createdAt)
     })
     return dataArr
 }
@@ -231,13 +234,13 @@ function setData(todos) {
 
 // DeleteAll
 function handleDeleteAll() {
-    const doneTasks = tasks.filter(task => task.status === 'done')
+    const doneTasks = tasks.filter(({ status }) => status === 'done')
     if (doneTasks.length === 0) {
         alert('Список уже пуст!')
         return
     }
     if (confirm('Удалить все задачи из колонки Done?')) {
-        tasks = tasks.filter(task => task.status !== 'done')
+        tasks = tasks.filter(({ status }) => status !== 'done')
         setData(tasks)
         renderTasks()
         alert('Список очищен!')
