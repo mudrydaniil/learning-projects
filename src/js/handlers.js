@@ -76,16 +76,16 @@ function renderTasks() {
         if (container) {
             const card = document.createElement('div')
             card.className = 'card task-card shadow-sm mb-3'
-            card.dataset.id = task.id
+            card.dataset.id = task.id // dataset - специальное свойство DOM-эл., сохраняем id карточки
             card.innerHTML = buildTaskTemplate(task)
             container.appendChild(card)
         }
     })
 
     // Счётчик количества задач
-    document.querySelectorAll('.board-column').forEach(column => {
-        const status = column.dataset.status
-        const count = tasks.filter(todo => todo.status === status).length
+    document.querySelectorAll('.board-column').forEach(column => { // для каждой колонки исполнямем код
+        const status = column.dataset.status // получаем статус текущей колонки из атрибута data-status HTML элемента
+        const count = tasks.filter(todo => todo.status === status).length // ищем задачи только с нужным нам статусом
         const countElement = column.querySelector('.board-column__count')
         if (countElement) {
             countElement.textContent = count
@@ -123,7 +123,7 @@ function handleAddTask(event) {
     renderTasks()
 
     // Закрываем модалку 
-    const modal = Modal.getInstance(modalElement);
+    const modal = Modal.getInstance(modalElement)
     modal.hide()
 
     // Очищаем поля формы
@@ -164,8 +164,8 @@ function editTask(id) {
 // Перключение статуса через селектв карточке
 function changeStatus(select) {
     console.log('changeStatus сработал')
-    const id = select.dataset.id
-    const newStatus = select.value
+    const id = select.dataset.id // получаем id задачи
+    const newStatus = select.value // возвращает нам значение статус выбранного option в select
 
     const task = tasks.find(todo => todo.id === id)
     if (!task) {
@@ -188,18 +188,18 @@ function changeStatus(select) {
 // Инициализация всех обработчиков карточек
 function initCardHandlers() {
     document.addEventListener('click', event => {
-        const deleteBtn = event.target.closest('.delete-btn');
+        const deleteBtn = event.target.closest('.delete-btn')
         if (deleteBtn) {
-            const id = deleteBtn.dataset.id;
-            deleteTask(id);
-            return;
+            const id = deleteBtn.dataset.id
+            deleteTask(id)
+            return
         }
 
-        const editBtn = event.target.closest('.edit-btn');
+        const editBtn = event.target.closest('.edit-btn')
         if (editBtn) {
-            const id = editBtn.dataset.id;
-            editTask(id);
-            return;
+            const id = editBtn.dataset.id
+            editTask(id)
+            return
         }
     })
 

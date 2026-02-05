@@ -25,6 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTasks() // рендерим
     initCardHandlers() // Вешаем обработчики - удаления, редактирования и смены статуса задачи
     if (buttonDeleteAll) {
-        buttonDeleteAll.addEventListener('click', handleDeleteAll)
+        buttonDeleteAll.addEventListener('click', handleDeleteAll) // обработчик удаления всех задач
     }
 })

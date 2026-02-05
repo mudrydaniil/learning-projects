@@ -26,6 +26,7 @@ export function initModal() {
     // Поверяем на наличие модального окна
     if (!modalElement) {
         console.error('Модальное окно exampleModal не найдено')
+        return
     }
 
     // Проверяем на наличие формы
